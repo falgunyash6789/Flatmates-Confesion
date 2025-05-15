@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import UserCard from '../components/UserCard';
-import './Dashboard.css'
+
 const users = [
   'Yash Maske',
   'Yash Deshmukh',
@@ -31,38 +31,75 @@ const Dashboard = ({ user }) => {
   }, []);
 
   return (
-    <div className="dashboard-container">
-      <h1 className="dashboard-welcome">
-        👋 Welcome, <span className="dashboard-username">{user}</span>
+    <div style={{
+      padding: '1rem',
+      minHeight: '100vh',
+      background: 'linear-gradient(to top right, #f0fdf4, #ffffff, #dcfce7)',
+      fontFamily: 'Arial, sans-serif'
+    }}>
+      <h1 style={{
+        fontSize: '2rem',
+        fontWeight: 'bold',
+        color: '#15803d',
+        marginBottom: '1.5rem'
+      }}>
+        👋 Welcome, <span style={{ color: '#000' }}>{user}</span>
       </h1>
 
       {/* User Cards Section */}
-      <div className="dashboard-grid">
+      <div style={{
+        display: 'grid',
+        gap: '1.5rem',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        marginBottom: '2.5rem'
+      }}>
         {users.map((name) => (
           <UserCard key={name} toUser={name} fetchMessages={fetchMessages} />
         ))}
       </div>
 
       {/* Confessions Section */}
-      <h2 id="confessions" className="confessions-heading">
+      <h2 id="confessions" style={{
+        fontSize: '1.5rem',
+        fontWeight: 600,
+        color: '#166534',
+        marginBottom: '1rem',
+        scrollMarginTop: '5rem'
+      }}>
         🕵️ Anonymous Confessions
       </h2>
 
-      <div className="confessions-container">
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem'
+      }}>
         {messages.length > 0 ? (
           messages.map((msg) => (
-            <div key={msg._id} className="confession-card">
-              <p className="confession-to">
-                <strong>To:</strong> {msg.toUser}
+            <div key={msg._id} style={{
+              padding: '1rem',
+              background: '#fff',
+              border: '1px solid #bbf7d0',
+              borderRadius: '12px',
+              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.06)',
+              transition: 'box-shadow 0.3s ease'
+            }}>
+              <p style={{ fontSize: '0.875rem', color: '#4b5563', marginBottom: '0.5rem' }}>
+                <strong style={{ color: '#15803d' }}>To:</strong> {msg.toUser}
               </p>
-              <p className="confession-message">{msg.message}</p>
-              <p className="confession-time">
+              <p style={{ fontSize: '1rem', color: '#1f2937' }}>{msg.message}</p>
+              <p style={{
+                textAlign: 'right',
+                fontSize: '0.75rem',
+                color: '#9ca3af',
+                marginTop: '0.5rem'
+              }}>
                 {new Date(msg.timestamp).toLocaleString()}
               </p>
             </div>
           ))
         ) : (
-          <p className="confession-empty">No confessions yet. 😶</p>
+          <p style={{ color: '#6b7280', fontStyle: 'italic' }}>No confessions yet. 😶</p>
         )}
       </div>
     </div>
