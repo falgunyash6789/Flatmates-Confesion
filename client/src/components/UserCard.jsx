@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { MessageSquare } from 'lucide-react';
-
+import './UserCard.css'
 const UserCard = ({ toUser, fetchMessages }) => {
   const [message, setMessage] = useState('');
   const [sent, setSent] = useState(false);
